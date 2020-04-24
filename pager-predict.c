@@ -30,7 +30,6 @@ void pageit(Pentry q[MAXPROCESSES]) {
     int page;
     int pc;
 
-
     //possible next pages given current page
     //-1 is filler if there are not enough possible pages
     //only did pages 0-14 because on analysis, pages 15-19
@@ -52,8 +51,6 @@ void pageit(Pentry q[MAXPROCESSES]) {
      {0,9,14},
      {0,-1,-1}};
 
-
-
     for(process = 0; process< MAXPROCESSES; process++){
         if(q[process].active) {
 
@@ -63,18 +60,14 @@ void pageit(Pentry q[MAXPROCESSES]) {
             int addPages[15]= {0};
        
             // program counter for process
-            pc = q[process].pc; 
-
-                    
+            pc = q[process].pc;      
             page = pc/PAGESIZE; 
             addPages[page]= 1;
 
              //find current page's possible next pages 
             for(int i = 0; i < 3; i++){
                 if(nextPages[page][i] != -1){
-                    addPages[nextPages[page][i]] = 1;
-                    
-                      
+                    addPages[nextPages[page][i]] = 1;                                        
                 }
             }
 
@@ -85,10 +78,8 @@ void pageit(Pentry q[MAXPROCESSES]) {
                     if(nextPages[nextPages[page][0]][y] != -1){
                         addPages[nextPages[nextPages[page][0]][y]] = 1;
                 }
-
                 }
             }
-
             
             for(int j = 0; j < 15; j++){
                 if(addPages[j]== 1){
